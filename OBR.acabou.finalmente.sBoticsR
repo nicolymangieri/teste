@@ -1,0 +1,33 @@
+texto sensorDireita = "1"
+texto sensorEsquerda = "2"
+texto sensorDireita2 = "3"
+texto sensorEsquerda2 = "4"
+texto sensorMeio = "5"
+inicio
+    levantar (3000)
+    enquanto (verdadeiro) farei {
+    sensorDireita = cor(2)
+    sensorEsquerda = cor(4)
+    sensorDireita2 = cor(1)
+    sensorEsquerda2 = cor(5)
+    sensorMeio = cor(3)
+
+    escrever(2, sensorEsquerda)
+
+    se (sensorDireita == "BRANCO" e sensorEsquerda == "BRANCO") entao { frente (150) escrever (2, virartexto(luz(3))) }
+    se (sensorDireita == "PRETO" e sensorEsquerda ==  "BRANCO") entao { 
+       frente (100) esperar (200)
+    enquanto (luz(3) > 40 ) farei {escrever (2, virartexto(luz(3))) rotacionar (110,3)}}
+
+     se (sensorEsquerda == "PRETO" e sensorDireita ==  "BRANCO") entao { 
+     frente (120)  esperar (200)
+    enquanto (luz(3) > 50 )
+     farei {escrever (2, virartexto(luz(3))) rotacionar (80, negativo (7)) } 
+
+    enquanto (luz(2) > 40 e luz(4) > 40 ) farei {escrever (2, virartexto(luz(3))) frente(100) esperar(100) }}
+
+    }
+    parar()
+    frente (100) esperar (2000)
+
+fim
