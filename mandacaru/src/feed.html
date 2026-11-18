@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Mandacaru Feed</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .canvas { width: 1080px; height: 1350px; background: var(--green-900); }
+  .bg { left: 0; top: -520px; width: 1080px; }
+  .shade { position: absolute; inset: 0; background:
+    linear-gradient(180deg, rgba(15,53,25,.35) 0%, rgba(15,53,25,0) 18%, rgba(15,53,25,0) 40%, rgba(15,53,25,.88) 58%, var(--green-900) 66%); }
+
+  .logo { position: absolute; top: 34px; left: 40px; height: 170px; filter: drop-shadow(0 10px 20px rgba(0,0,0,.35)); }
+  .tag { position: absolute; top: 52px; right: 40px; background: rgba(247,245,238,.94); color: var(--green-900);
+    font-weight: 800; font-size: 24px; padding: 12px 22px; border-radius: 999px; display: flex; gap: 10px; align-items: center; }
+
+  .polaroid { position: absolute; top: 400px; right: 30px; width: 262px; background: #fff; padding: 12px 12px 0; border-radius: 10px;
+    transform: rotate(5deg); box-shadow: 0 24px 50px rgba(0,0,0,.45); }
+  .polaroid .ph { height: 262px; border-radius: 4px; background: url(assets/piscina.jpg) center 62% / 150% auto no-repeat; }
+  .polaroid .cap { text-align: center; font-weight: 800; font-size: 21px; color: var(--green-900); padding: 10px 0 12px; }
+
+  .content { position: absolute; left: 56px; right: 56px; top: 724px; color: #fff; }
+  .h1 { font-weight: 900; font-size: 74px; line-height: 1.02; letter-spacing: -2px; }
+  .h1 .y { color: var(--yellow); }
+  .chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .chip { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.1); border: 2px solid rgba(255,255,255,.16);
+    border-radius: 999px; padding: 10px 20px 10px 12px; font-weight: 700; font-size: 25px; }
+  .chip .dot { width: 40px; height: 40px; border-radius: 50%; background: var(--yellow); color: var(--green-900); display: grid; place-items: center; font-size: 23px; }
+
+  .prices { margin-top: 30px; display: grid; grid-template-columns: repeat(3, 1fr); background: var(--cream); border-radius: 28px; overflow: hidden; }
+  .p { padding: 18px 10px 16px; text-align: center; color: var(--green-900); }
+  .p + .p { border-left: 2px solid rgba(15,53,25,.12); }
+  .p .d { font-weight: 700; font-size: 22px; opacity: .8; }
+  .p .v { font-weight: 900; font-size: 54px; letter-spacing: -1.5px; line-height: 1.05; }
+  .p .v small { font-size: 26px; margin-right: 4px; letter-spacing: 0; }
+  .p.hot { background: var(--yellow); }
+
+  .bottom { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+  .cta { display: flex; align-items: center; gap: 16px; background: #1FAF54; color: #fff; border-radius: 999px; padding: 12px 30px 12px 12px; }
+  .cta .wa { width: 64px; height: 64px; border-radius: 50%; background: #fff; color: #1FAF54; display: grid; place-items: center; font-size: 38px; }
+  .cta .t1 { font-weight: 900; font-size: 29px; line-height: 1; }
+  .cta .t2 { font-weight: 700; font-size: 23px; margin-top: 4px; opacity: .95; }
+  .info { text-align: right; font-weight: 600; font-size: 21px; line-height: 1.5; opacity: .9; }
+  .info b { font-weight: 800; }
+</style></head>
+<body>
+<div class="canvas" id="art">
+  <img class="bg" src="assets/sinuca.jpg" alt="">
+  <div class="shade"></div>
+  <img class="logo" src="assets/logo.png" alt="Mandacaru">
+  <div class="tag"><i data-ico="users"></i>Até 100 convidados · 12h</div>
+
+  <div class="polaroid"><div class="ph"></div><div class="cap">+ piscina com biribol</div></div>
+
+  <div class="content">
+    <div class="h1">Piscina, sinuca e churrasco.<br><span class="y">Só falta a sua turma.</span></div>
+    <div class="chips">
+      <div class="chip"><span class="dot"><i data-ico="flame"></i></span>Forno a lenha</div>
+      <div class="chip"><span class="dot"><i data-ico="ball"></i></span>Ping-pong</div>
+      <div class="chip"><span class="dot"><i data-ico="chair"></i></span>Mesas e cadeiras</div>
+    </div>
+    <div class="prices">
+      <div class="p hot"><div class="d">Seg a qui</div><div class="v"><small>R$</small>500</div></div>
+      <div class="p"><div class="d">Sexta</div><div class="v"><small>R$</small>600</div></div>
+      <div class="p"><div class="d">Sáb, dom e feriado</div><div class="v"><small>R$</small>700</div></div>
+    </div>
+    <div class="bottom">
+      <div class="cta"><div class="wa"><i data-ico="wa"></i></div><div><div class="t1">Reserve no WhatsApp</div><div class="t2">(67) 99912-4425</div></div></div>
+      <div class="info"><b>@mandacaru_festas</b><br>R. Dona Thomazia Rondon, 895</div>
+    </div>
+  </div>
+</div>
+<script src="icons.js"></script>
+</body></html>

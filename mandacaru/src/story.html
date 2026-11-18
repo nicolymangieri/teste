@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Mandacaru Story</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .canvas { width: 1080px; height: 1920px; }
+  .bg { left: 50%; top: 0; height: 1920px; transform: translateX(-50%); }
+  /* leve véu no céu e no gramado para leitura */
+  .veil-top { position: absolute; inset: 0 0 auto 0; height: 760px;
+    background: linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 100%); }
+  .veil-bot { position: absolute; inset: auto 0 0 0; height: 640px;
+    background: linear-gradient(180deg, rgba(10,40,18,0) 0%, rgba(10,40,18,.55) 45%, rgba(10,40,18,.92) 100%); }
+
+  .logo { position: absolute; top: 88px; left: 50%; transform: translateX(-50%); height: 200px;
+    filter: drop-shadow(0 10px 22px rgba(0,0,0,.25)); }
+
+  .head { position: absolute; top: 306px; left: 0; right: 0; text-align: center; }
+  .h1 { font-weight: 900; font-size: 118px; line-height: .98; letter-spacing: -3px; color: var(--green-900); }
+  .h1 .hl { display: inline-block; background: var(--yellow); padding: 4px 30px 14px; border-radius: 26px;
+    margin-top: 12px; transform: rotate(-2deg); box-shadow: 0 14px 30px rgba(15,53,25,.25); }
+  .h1.small { font-size: 88px; letter-spacing: -2.5px; }
+  .sub { margin-top: 30px; display: inline-block; background: rgba(247,245,238,.93); border-radius: 999px; padding: 14px 34px; font-weight: 700; font-size: 34px; color: var(--green-900); box-shadow: 0 10px 26px rgba(0,0,0,.15); }
+  .sub b { color: var(--green-700); }
+
+  .row { position: absolute; top: 738px; left: 56px; right: 56px; display: grid; grid-template-columns: 430px 1fr; gap: 22px; }
+  .price { background: var(--green-800); color: #fff; border-radius: 36px; padding: 30px 32px 28px;
+    box-shadow: 0 24px 50px rgba(0,0,0,.35); border: 3px solid rgba(255,255,255,.14); }
+  .price .from { font-weight: 600; font-size: 30px; opacity: .9; }
+  .price .val { font-weight: 900; font-size: 116px; line-height: 1; color: var(--yellow); letter-spacing: -3px; margin-top: 4px; white-space: nowrap; }
+  .price .val small { font-size: 52px; letter-spacing: -1px; margin-right: 6px; vertical-align: 38px; }
+  .price .per { margin-top: 18px; display: inline-block; background: rgba(255,255,255,.12); border-radius: 999px;
+    padding: 10px 18px; font-weight: 700; font-size: 25px; }
+  .price .per b { color: var(--yellow); }
+  .price .when { margin-top: 18px; font-weight: 500; font-size: 22px; line-height: 1.35; opacity: .85; }
+
+  .feats { background: rgba(247,245,238,.96); border-radius: 36px; padding: 28px 28px; display: flex; flex-direction: column; justify-content: center; gap: 16px;
+    box-shadow: 0 24px 50px rgba(0,0,0,.28); }
+  .feat { display: flex; align-items: center; gap: 18px; font-weight: 800; font-size: 28px; line-height: 1.12; color: var(--green-900); }
+  .feat .dot { flex: none; width: 62px; height: 62px; border-radius: 50%; background: var(--yellow);
+    display: grid; place-items: center; font-size: 34px; color: var(--green-900); }
+
+  .cta { position: absolute; top: 1404px; left: 56px; right: 56px; height: 132px; border-radius: 999px; background: var(--yellow);
+    display: flex; align-items: center; gap: 26px; padding: 0 22px; box-shadow: 0 22px 50px rgba(0,0,0,.4); }
+  .cta .wa { width: 96px; height: 96px; border-radius: 50%; background: #fff; display: grid; place-items: center; font-size: 56px; color: #1FAF54; flex: none; }
+  .cta .txt { flex: 1; color: var(--green-900); }
+  .cta .t1 { font-weight: 900; font-size: 44px; line-height: 1; letter-spacing: -.5px; }
+  .cta .t2 { font-weight: 700; font-size: 31px; margin-top: 6px; }
+  .cta .go { width: 84px; height: 84px; border-radius: 50%; background: var(--green-800); color: var(--yellow); display: grid; place-items: center; font-size: 44px; flex: none; }
+
+  .foot { position: absolute; top: 1610px; left: 0; right: 0; text-align: center; color: #fff; }
+  .foot .l { display: flex; justify-content: center; align-items: center; gap: 12px; font-weight: 700; font-size: 33px; }
+  .foot .l + .l { margin-top: 14px; font-weight: 600; font-size: 27px; opacity: .92; }
+  .foot .l .ico { font-size: 36px; }
+  .foot .l + .l .ico { font-size: 28px; }
+  .note { position: absolute; top: 1758px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,.7); font-weight: 500; font-size: 20px; }
+</style></head>
+<body>
+<div class="canvas" id="art">
+  <img class="bg" src="assets/piscina.jpg" alt="">
+  <div class="veil-top"></div>
+  <div class="veil-bot"></div>
+  <img class="logo" src="assets/logo.png" alt="Mandacaru">
+
+  <div class="head" id="head"></div>
+
+  <div class="row">
+    <div class="price">
+      <div class="from">Locação a partir de</div>
+      <div class="val"><small>R$</small>500</div>
+      <div class="per">Dá <b>R$ 5 por convidado*</b></div>
+      <div class="when">Sexta R$ 600 · Sáb, dom<br>e feriados R$ 700</div>
+    </div>
+    <div class="feats">
+      <div class="feat"><span class="dot"><i data-ico="waves"></i></span>Piscina com biribol</div>
+      <div class="feat"><span class="dot"><i data-ico="ball"></i></span>Sinuca e ping-pong</div>
+      <div class="feat"><span class="dot"><i data-ico="flame"></i></span>Churrasqueira e forno a lenha</div>
+      <div class="feat"><span class="dot"><i data-ico="chair"></i></span>Mesas e cadeiras pra todos</div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div class="wa"><i data-ico="wa"></i></div>
+    <div class="txt"><div class="t1">Reserve sua data</div><div class="t2">(67) 99912-4425</div></div>
+    <div class="go"><i data-ico="arrow"></i></div>
+  </div>
+
+  <div class="foot">
+    <div class="l"><i data-ico="insta"></i>@mandacaru_festas</div>
+    <div class="l"><i data-ico="pin"></i>Rua Dona Thomazia Rondon, 895 · Campo Grande</div>
+  </div>
+  <div class="note">*Segunda a quinta, com 100 convidados. Período de 12 horas.</div>
+</div>
+<script>
+  const v = new URLSearchParams(location.search).get('v') || 'piscina';
+  const H = {
+    piscina: `<div class="h1">Sua festa<br><span class="hl">com piscina</span></div>
+              <div class="sub">Até <b>100 convidados</b> · <b>12 horas</b> de evento</div>`,
+    confra:  `<div class="h1 small">Confra de fim<br>de ano <span class="hl">com piscina</span></div>
+              <div class="sub">Até <b>100 convidados</b> · <b>12 horas</b> de evento</div>`,
+  };
+  document.getElementById('head').innerHTML = H[v];
+</script>
+<script src="icons.js"></script>
+</body></html>
