@@ -5,7 +5,8 @@
   .canvas { width: 1080px; height: 1350px; background: var(--green-900); }
   .bg { left: 0; top: -520px; width: 1080px; }
   .shade { position: absolute; inset: 0; background:
-    linear-gradient(180deg, rgba(15,53,25,.35) 0%, rgba(15,53,25,0) 18%, rgba(15,53,25,0) 40%, rgba(15,53,25,.88) 58%, var(--green-900) 66%); }
+    linear-gradient(180deg, rgba(15,53,25,.35) 0%, rgba(15,53,25,0) 18%, rgba(15,53,25,0) 40%, rgba(15,53,25,.88) 58%, var(--green-900) 66%),
+    radial-gradient(70% 45% at 100% 22%, rgba(15,53,25,.42) 0%, rgba(15,53,25,0) 100%); }
 
   .logo { position: absolute; top: 34px; left: 40px; height: 170px; filter: drop-shadow(0 10px 20px rgba(0,0,0,.35)); }
   .tag { position: absolute; top: 52px; right: 40px; background: rgba(247,245,238,.94); color: var(--green-900);
@@ -42,7 +43,7 @@
 </style></head>
 <body>
 <div class="canvas" id="art">
-  <img class="bg" src="assets/sinuca.jpg" alt="">
+  <img class="bg" src="assets/sinuca-feed.jpg" alt="">
   <div class="shade"></div>
   <img class="logo" src="assets/logo.png" alt="Mandacaru">
   <div class="tag"><i data-ico="users"></i>Até 100 convidados · 12h</div>

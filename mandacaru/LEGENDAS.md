@@ -34,7 +34,7 @@ No Espaço Mandacaru você tem 12 horas de festa para até 100 convidados:
 #campogrande #campograndems #espacodefestas #festacampogrande #aniversariocg #confraternizacao #churrascocg
 
 **Opção 2 (gancho de preço)**
-Festa pra 100 pessoas com piscina por R$ 5 por convidado? Aqui dá 🌵 De segunda a quinta, a locação de 12 horas sai R$ 500. Comenta QUERO que a gente te manda as datas livres!
+Festa com piscina pra até 100 pessoas a partir de R$ 500? Aqui tem 🌵 De segunda a quinta, a locação de 12 horas sai R$ 500. Comenta QUERO que a gente te manda as datas livres!
 
 **Opção 3 (fim de ano)**
 A confra da firma ou da família já tem lugar? 🎄 Piscina, churrasqueira, forno a lenha, sinuca e 12 horas de festa. Dezembro está enchendo, então garanta sua data no WhatsApp: (67) 99912-4425.
