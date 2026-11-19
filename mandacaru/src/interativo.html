@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Mandacaru Story Interativo</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .canvas { width: 1080px; height: 1920px; }
+  .bg { left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+  .shade { position: absolute; inset: 0; background:
+    linear-gradient(180deg, rgba(15,53,25,.55) 0%, rgba(15,53,25,.15) 32%, rgba(15,53,25,.05) 50%, rgba(15,53,25,.55) 78%, rgba(15,53,25,.92) 100%); }
+
+  .logo { position: absolute; top: 84px; left: 50%; transform: translateX(-50%); height: 170px; filter: drop-shadow(0 10px 22px rgba(0,0,0,.3)); }
+  .kicker { position: absolute; top: 290px; left: 50%; transform: translateX(-50%); white-space: nowrap;
+    background: var(--yellow); color: var(--green-900); font-weight: 900; font-size: 28px; letter-spacing: 3px; text-transform: uppercase;
+    padding: 14px 30px; border-radius: 999px; box-shadow: 0 12px 28px rgba(0,0,0,.25); z-index: 2; }
+
+  .card { position: absolute; top: 322px; left: 60px; right: 60px; background: var(--green-800); border-radius: 44px;
+    padding: 76px 50px 50px; text-align: center; color: #fff; box-shadow: 0 30px 60px rgba(0,0,0,.35); border: 3px solid rgba(255,255,255,.14); }
+  .h1 { font-weight: 900; font-size: 84px; line-height: 1.02; letter-spacing: -2px; }
+  .h1 .y { color: var(--yellow); }
+  .sub { margin-top: 24px; font-weight: 600; font-size: 33px; line-height: 1.35; opacity: .92; }
+  .sub b { color: var(--yellow); font-weight: 800; }
+
+  .cue { position: absolute; left: 0; right: 0; text-align: center; color: #fff; font-weight: 800; font-size: 34px;
+    text-shadow: 0 3px 14px rgba(0,0,0,.55); display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .cue .ico { font-size: 54px; transform: rotate(90deg); color: var(--yellow); filter: drop-shadow(0 3px 8px rgba(0,0,0,.4)); }
+
+  .prices { position: absolute; left: 60px; right: 60px; display: grid; grid-template-columns: repeat(3,1fr); background: var(--cream);
+    border-radius: 30px; overflow: hidden; box-shadow: 0 24px 50px rgba(0,0,0,.35); }
+  .p { padding: 20px 8px 18px; text-align: center; color: var(--green-900); }
+  .p + .p { border-left: 2px solid rgba(15,53,25,.12); }
+  .p .d { font-weight: 700; font-size: 23px; opacity: .8; }
+  .p .v { font-weight: 900; font-size: 58px; letter-spacing: -1.5px; line-height: 1.05; }
+  .p .v small { font-size: 28px; margin-right: 4px; letter-spacing: 0; }
+  .p.hot { background: var(--yellow); }
+
+  .foot { position: absolute; top: 1560px; left: 0; right: 0; text-align: center; color: #fff; }
+  .foot .l { display: flex; justify-content: center; align-items: center; gap: 12px; font-weight: 700; font-size: 32px; }
+  .foot .l + .l { margin-top: 12px; font-weight: 600; font-size: 26px; opacity: .9; }
+  .foot .ico { font-size: 34px; }
+  .foot .l + .l .ico { font-size: 27px; }
+  .fine { position: absolute; top: 1700px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,.72); font-weight: 500; font-size: 21px; }
+</style></head>
+<body>
+<div class="canvas" id="art"></div>
+<script>
+const FOOT = `<div class="foot"><div class="l"><i data-ico="insta"></i>@mandacaru_festas</div>
+  <div class="l"><i data-ico="wa"></i>(67) 99912-4425 · Rua Dona Thomazia Rondon, 895</div></div>`;
+const CUE = (y, t) => `<div class="cue" style="top:${y}px">${t}<i data-ico="arrow"></i></div>`;
+const S = {
+  1: { bg: 'patio.jpg', kicker: 'Enquete', h: `A confra de<br>fim de ano<br><span class="y">já tem lugar?</span>`,
+       sub: `Piscina, churrasco e 12h de festa<br>pra até 100 pessoas`, cue: [925, 'Vota aqui'],
+       fine: 'Votou "ainda não"? A gente te chama no direct com as datas livres.' },
+  2: { bg: 'piscina.jpg', kicker: 'Quiz rápido', h: `Quantos convidados<br><span class="y">cabem no Mandacaru?</span>`,
+       sub: `Arrisca aí 👇 a resposta vai te surpreender`, cue: [870, 'Responde aqui'] },
+  3: { bg: 'piscina-tarde.jpg', kicker: 'De 0 a 100', h: `Calor de dezembro,<br>piscina e churrasco.<br><span class="y">Qual sua vontade?</span>`,
+       sub: `Arrasta o emoji até onde chega`, cue: [925, 'Arrasta aqui'] },
+  4: { bg: 'sinuca-feed.jpg', pos: '50% 50%', kicker: 'Este ou aquele', h: `Na sua confra,<br><span class="y">o que não pode faltar?</span>`,
+       sub: `Piscina com biribol ou churrasco<br>com forno a lenha? (aqui tem os dois)`, cue: [925, 'Escolhe aqui'] },
+  5: { bg: 'patio.jpg', kicker: 'Caixinha', h: `Ficou alguma<br><span class="y">dúvida?</span>`,
+       sub: `Datas, valores, estrutura, visita...<br>pergunta que a gente responde`, cue: [855, 'Manda aqui'] },
+  6: { bg: 'piscina.jpg', kicker: 'Dezembro', h: `Sua festa de<br>fim de ano<br><span class="y">com piscina</span>`,
+       sub: `<b>12 horas</b> · até <b>100 convidados</b> · horários flexíveis`, prices: 945, cue: [1180, 'Toca e reserve'],
+       fine: 'Natal e Ano Novo têm valores diferenciados. Consulte.' },
+};
+const n = new URLSearchParams(location.search).get('n') || '1';
+const s = S[n];
+document.getElementById('art').innerHTML = `
+  <img class="bg ${s.wide ? 'wide' : ''}" src="assets/${s.bg}" style="object-position:${s.pos || '50% 50%'}">
+  <div class="shade"></div>
+  <img class="logo" src="assets/logo.png">
+  <div class="kicker">${s.kicker}</div>
+  <div class="card"><div class="h1">${s.h}</div><div class="sub">${s.sub}</div></div>
+  ${s.prices ? `<div class="prices" style="top:${s.prices}px">
+     <div class="p hot"><div class="d">Seg a qui</div><div class="v"><small>R$</small>500</div></div>
+     <div class="p"><div class="d">Sexta</div><div class="v"><small>R$</small>600</div></div>
+     <div class="p"><div class="d">Sáb, dom e feriado</div><div class="v"><small>R$</small>700</div></div></div>` : ''}
+  ${CUE(s.cue[0], s.cue[1])}
+  ${FOOT}
+  ${s.fine ? `<div class="fine">${s.fine}</div>` : ''}`;
+document.fonts.ready.then(() => {
+const card = document.querySelector('.card'), pr = document.querySelector('.prices');
+if (pr) pr.style.top = (card.offsetTop + card.offsetHeight + 28) + 'px';
+const last = pr || card;
+document.querySelector('.cue').style.top = (last.offsetTop + last.offsetHeight + 40) + 'px';
+});
+</script>
+<script src="icons.js"></script>
+</body></html>

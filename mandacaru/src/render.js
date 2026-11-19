@@ -6,6 +6,12 @@ const jobs = [
   ['story.html?v=piscina', 1080, 1920, 'story-mandacaru-piscina.png'],
   ['story.html?v=confra', 1080, 1920, 'story-mandacaru-confra.png'],
   ['feed.html', 1080, 1350, 'feed-mandacaru.png'],
+  ['interativo.html?n=1', 1080, 1920, 'interativos/story-interativo-1.png'],
+  ['interativo.html?n=2', 1080, 1920, 'interativos/story-interativo-2.png'],
+  ['interativo.html?n=3', 1080, 1920, 'interativos/story-interativo-3.png'],
+  ['interativo.html?n=4', 1080, 1920, 'interativos/story-interativo-4.png'],
+  ['interativo.html?n=5', 1080, 1920, 'interativos/story-interativo-5.png'],
+  ['interativo.html?n=6', 1080, 1920, 'interativos/story-interativo-6.png'],
 ];
 (async () => {
   const b = await chromium.launch();
